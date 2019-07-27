@@ -35,7 +35,7 @@ const Login = ({ classes }: WithStyles<typeof styles>) => {
             textColor="secondary"
           >
             <Tab label="ENTER ACCESS KEY" icon={<VpnKeyIcon />} />
-            <Tab label="LOGIN" icon={<LockOpenIcon />} />
+            <Tab label="ADMIN LOGIN" icon={<LockOpenIcon />} />
           </Tabs>
 
           <SwipeableViews
@@ -47,7 +47,7 @@ const Login = ({ classes }: WithStyles<typeof styles>) => {
             </div>
 
             <div className={classes.content}>
-              <LoginForm />
+              <LoginForm onLogin={() => console.log("TODO")} />
             </div>
           </SwipeableViews>
         </Paper>
