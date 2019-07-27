@@ -43,11 +43,11 @@ const Login = ({ classes }: WithStyles<typeof styles>) => {
             onChangeIndex={newIndex => setTabIndex(newIndex)}
           >
             <div className={classes.content}>
-              <EnterAccessKey onSubmit={() => console.log("TODO")} />
+              <EnterAccessKey onSubmit={accessKey => alert(`TODO: Handle access key ${accessKey}`)} />
             </div>
 
             <div className={classes.content}>
-              <LoginForm onLogin={() => console.log("TODO")} />
+              <LoginForm onLogin={(username, password) => alert(`TODO: Handle login: Username ${username}, Password ${password}`)} />
             </div>
           </SwipeableViews>
         </Paper>
