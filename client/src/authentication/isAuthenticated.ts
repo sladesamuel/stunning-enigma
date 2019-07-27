@@ -1,1 +1,1 @@
-export const isAuthenticated = (): boolean => false
+export const isAuthenticated = (): boolean => !!localStorage.getItem("stunning-enigma-key")

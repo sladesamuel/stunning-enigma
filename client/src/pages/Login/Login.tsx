@@ -1,4 +1,5 @@
 import React, { memo } from "react"
+import { Redirect } from "react-router-dom"
 import SwipeableViews from "react-swipeable-views"
 import {
   Paper, Tabs, Tab, Grid,
@@ -19,40 +20,50 @@ const styles = (theme: Theme) => createStyles({
 
 const Login = ({ classes }: WithStyles<typeof styles>) => {
   const [tabIndex, setTabIndex] = React.useState(0)
+  const [loggedIn, setLoggedIn] = React.useState(false)
+
+  const login = (key: string) => {
+    localStorage.setItem("stunning-enigma-key", key)
+    setLoggedIn(true)
+  }
 
   return (
-    <Grid
-      container
-      justify="center"
-    >
-      <Grid item>
-        <Paper square className={classes.paper}>
-          <Tabs
-            value={tabIndex}
-            onChange={(_, newIndex) => setTabIndex(newIndex)}
-            variant="fullWidth"
-            indicatorColor="secondary"
-            textColor="secondary"
-          >
-            <Tab label="ENTER ACCESS KEY" icon={<VpnKeyIcon />} />
-            <Tab label="ADMIN LOGIN" icon={<LockOpenIcon />} />
-          </Tabs>
+    <>
+      {loggedIn && <Redirect to="/" />}
 
-          <SwipeableViews
-            index={tabIndex}
-            onChangeIndex={newIndex => setTabIndex(newIndex)}
-          >
-            <div className={classes.content}>
-              <EnterAccessKey onSubmit={accessKey => alert(`TODO: Handle access key ${accessKey}`)} />
-            </div>
+      <Grid
+        container
+        justify="center"
+      >
+        <Grid item>
+          <Paper square className={classes.paper}>
+            <Tabs
+              value={tabIndex}
+              onChange={(_, newIndex) => setTabIndex(newIndex)}
+              variant="fullWidth"
+              indicatorColor="secondary"
+              textColor="secondary"
+            >
+              <Tab label="ENTER ACCESS KEY" icon={<VpnKeyIcon />} />
+              <Tab label="ADMIN LOGIN" icon={<LockOpenIcon />} />
+            </Tabs>
 
-            <div className={classes.content}>
-              <LoginForm onLogin={(username, password) => alert(`TODO: Handle login: Username ${username}, Password ${password}`)} />
-            </div>
-          </SwipeableViews>
-        </Paper>
+            <SwipeableViews
+              index={tabIndex}
+              onChangeIndex={newIndex => setTabIndex(newIndex)}
+            >
+              <div className={classes.content}>
+                <EnterAccessKey onSubmit={accessKey => login(accessKey)} />
+              </div>
+
+              <div className={classes.content}>
+                <LoginForm onLogin={(username, password) => login(`${username}:${password}`)} />
+              </div>
+            </SwipeableViews>
+          </Paper>
+        </Grid>
       </Grid>
-    </Grid>
+    </>
   )
 }
 
