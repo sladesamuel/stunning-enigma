@@ -3,6 +3,7 @@ import SwipeableViews from "react-swipeable-views"
 import { Paper, Tabs, Tab } from "@material-ui/core"
 import LockOpenIcon from "@material-ui/icons/LockOpen"
 import VpnKeyIcon from "@material-ui/icons/VpnKey"
+import { EnterAccessKey, LoginForm } from "../../components"
 
 const Login = () => {
   const [tabIndex, setTabIndex] = React.useState(0)
@@ -21,8 +22,8 @@ const Login = () => {
       </Tabs>
 
       <SwipeableViews index={tabIndex} onChangeIndex={newIndex => setTabIndex(newIndex)}>
-        <div>Enter Access Key</div>
-        <div>Login</div>
+        <EnterAccessKey />
+        <LoginForm />
       </SwipeableViews>
     </Paper>
   )
