@@ -7,13 +7,6 @@ export default gql`
     password: String
   }
 
-  type Query {
-    """
-    Returns a test message
-    """
-    testMessage: String!
-  }
-
   type Mutation {
     login(model: LoginInput!): String
   }
