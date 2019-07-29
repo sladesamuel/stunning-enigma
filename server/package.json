@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "build": "webpack --config webpack.$NODE_ENV.js",
-    "start": "node dist/server",
+    "build:dev": "NODE_ENV=development npm run build",
+    "start": "npm run build:dev & node dist/server",
     "start:env": "node --require dotenv/config dist/server"
   },
   "keywords": [],
