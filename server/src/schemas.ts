@@ -1,13 +1,17 @@
 import { gql } from "apollo-server"
 
 export default gql`
-  input LoginInput {
-    accessKey: String
-    username: String
-    password: String
+  type AuthResult {
+    authToken: String
+    errorDescription: String
+  }
+
+  type Query {
+    health: String
   }
 
   type Mutation {
-    login(model: LoginInput!): String
+    login(accessKey: String!): AuthResult
+    adminLogin(username: String!, password: String!): AuthResult
   }
 `

@@ -1,25 +1,14 @@
-interface LoginModel {
-  accessKey: string
-  username: string
-  password: string
-}
+import AuthResult, { createErrorResult, createSuccessResult } from "./AuthResult";
 
-const isValidModel = (model: LoginModel): boolean => {
-  return !!model.accessKey || (!!model.username && !!model.password)
-}
-
-export const login = (model: LoginModel): string => {
-  if (!isValidModel(model)) {
-    return "Invalid access key or credentials"
+export const login = (accessKey: string): AuthResult => {
+  // TODO: Check in the data source for a matching access key and make sure it hasn't expired.
+  if (!accessKey) {
+    return createErrorResult("No access key given")
   }
 
-  if (!!model.accessKey) {
-    return "TemporaryAccessKey"
+  if (accessKey !== "test") {
+    return createErrorResult("Invalid access key")
   }
 
-  if (model.username === "admin" && model.password === "Password1") {
-    return "YouHaveAdminAccess"
-  }
-
-  return "Invalid username and/or password"
+  return createSuccessResult("TODO: Access Key")
 }
