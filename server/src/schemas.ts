@@ -6,8 +6,13 @@ export default gql`
     errorDescription: String
   }
 
+  type User {
+    username: String
+  }
+
   type Query {
     health: String
+    users: [User]
   }
 
   type Mutation {
