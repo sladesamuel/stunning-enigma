@@ -8,6 +8,9 @@ interface Environment {
     url: string,
     username: string,
     password: string
+  },
+  security: {
+    tokenKey: string
   }
 }
 
@@ -21,5 +24,8 @@ export const environment: Environment = {
     url: process.env.DB_URL || "",
     username: process.env.DB_USERNAME || "",
     password: process.env.DB_PASSWORD || ""
+  },
+  security: {
+    tokenKey: process.env.TOKEN_KEY || ""
   }
 }

@@ -3,7 +3,7 @@ import createDbConnection from "./createDbConnection"
 
 createDbConnection()
 
-interface User extends Document {
+export interface User extends Document {
   username: string
   password: string
   name: string

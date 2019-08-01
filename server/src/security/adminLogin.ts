@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt"
 import AuthResult, { createErrorResult, createSuccessResult } from "./AuthResult"
 import { getUserByUsername } from "../models/Users"
+import generateToken from "./generateToken"
 
 export const adminLogin = async (username: string, password: string): Promise<AuthResult> => {
   if (!username || !password) {
@@ -20,6 +21,6 @@ export const adminLogin = async (username: string, password: string): Promise<Au
     return createErrorResult("This user is not authorized for admin access")
   }
 
-  // TODO: Generate the access key.
-  return createSuccessResult("TODO: Access Key")
+  const accessKey = generateToken(user)
+  return createSuccessResult(accessKey)
 }
