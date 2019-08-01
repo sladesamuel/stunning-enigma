@@ -1,10 +1,10 @@
 import { login, adminLogin } from "./security"
-import Users from "./models/users"
+import { getUsers } from "./models/Users"
 
 export default {
   Query: {
     health: () => "OK",
-    users: async () => await Users.find()
+    users: async () => await getUsers()
   },
   Mutation: {
     login: (_: any, args: any) => login(args.accessKey),
