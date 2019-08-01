@@ -1,7 +1,10 @@
 {
   "name": "stunning-enigma-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "A re-write of the Baby Predictions application written in React and NodeJS, using MongoDB, GraphQL and ExpressJS",
+  "repository": {
+    "url": "https://github.com/veyix/stunning-enigma"
+  },
   "scripts": {
     "build": "webpack --config webpack.$NODE_ENV.js",
     "build:dev": "NODE_ENV=development npm run build",
@@ -9,9 +12,10 @@
     "start": "node --require dotenv/config dist/server"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Samuel Slade",
+  "license": "GNU v3",
   "devDependencies": {
+    "@types/bcrypt": "^3.0.0",
     "@types/lodash": "^4.14.136",
     "@types/mongoose": "^5.5.11",
     "@types/webpack-env": "^1.14.0",
@@ -26,6 +30,7 @@
   },
   "dependencies": {
     "apollo-server": "^2.7.2",
+    "bcrypt": "^3.0.6",
     "graphql": "^14.4.2",
     "lodash": "^4.17.15",
     "mongoose": "^5.6.7"

@@ -2,6 +2,10 @@
 // has been started within a Docker container. This script is used to setup the
 // database for the server as well as the default user for this service to connect as
 
+if (!adminPassword) {
+  throw new Error("No admin password has been specified!")
+}
+
 const adminDb = connect("admin", "admin", "admin")
 const db = adminDb.getMongo().getDB("enigma")
 
@@ -13,7 +17,7 @@ db.createUser({
 
 db.users.insertOne({
   username: "slade",
-  password: "password",
+  password: adminPassword,
   name: "Samuel Slade",
   role: "admin"
 })
