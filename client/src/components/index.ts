@@ -1,4 +1,6 @@
 export * from "./AppContainer"
 export * from "./EnterAccessKey"
+export * from "./Error"
+export * from "./Loading"
 export * from "./LoginForm"
 export * from "./PageTitle"

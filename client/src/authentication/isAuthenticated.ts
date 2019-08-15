@@ -1,1 +1,3 @@
-export const isAuthenticated = (): boolean => !!localStorage.getItem("stunning-enigma-key")
+import { getAuthToken } from "./getAuthToken"
+
+export const isAuthenticated = (): boolean => !!getAuthToken()

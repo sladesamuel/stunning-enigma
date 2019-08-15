@@ -1,13 +1,24 @@
 import React, { memo } from "react"
-import { Redirect } from "react-router-dom"
 import SwipeableViews from "react-swipeable-views"
+import { useMutation, useApolloClient } from "@apollo/react-hooks"
+import gql from "graphql-tag"
 import {
   Paper, Tabs, Tab, Grid,
   Theme, createStyles, WithStyles, withStyles
 } from "@material-ui/core"
 import LockOpenIcon from "@material-ui/icons/LockOpen"
 import VpnKeyIcon from "@material-ui/icons/VpnKey"
-import { EnterAccessKey, LoginForm, PageTitle } from "../../components"
+import { EnterAccessKey, LoginForm, PageTitle, Loading, Error } from "../../components"
+import { storeAuthToken } from "../../authentication"
+
+const ADMIN_LOGIN = gql`
+  mutation adminLogin($username: String!, $password: String!) {
+    adminLogin(username: $username, password: $password) {
+      authToken
+      errorDescription
+    }
+  }
+`
 
 const styles = (theme: Theme) => createStyles({
   paper: {
@@ -20,16 +31,33 @@ const styles = (theme: Theme) => createStyles({
 
 const Login = ({ classes }: WithStyles<typeof styles>) => {
   const [tabIndex, setTabIndex] = React.useState(0)
-  const [loggedIn, setLoggedIn] = React.useState(false)
 
-  const login = (key: string) => {
-    localStorage.setItem("stunning-enigma-key", key)
-    setLoggedIn(true)
-  }
+  const client = useApolloClient()
+  const [adminLogin, adminLoginResult] = useMutation(
+    ADMIN_LOGIN,
+    {
+      onCompleted(data) {
+        if (!!data.adminLogin.authToken) {
+          storeAuthToken(data.adminLogin.authToken)
+
+          client.writeData({
+            data: {
+              isLoggedIn: true
+            }
+          })
+        }
+      }
+    }
+  )
+
+  const adminLoginError =
+    (!!adminLoginResult.error && adminLoginResult.error.message)
+      || (!!adminLoginResult.data && !!adminLoginResult.data.adminLogin && adminLoginResult.data.adminLogin.errorDescription)
 
   return (
     <>
-      {loggedIn && <Redirect to="/" />}
+      {adminLoginResult.loading && <Loading />}
+      {!!adminLoginError && <Error error={adminLoginError} />}
 
       <Grid
         container
@@ -57,11 +85,18 @@ const Login = ({ classes }: WithStyles<typeof styles>) => {
               onChangeIndex={newIndex => setTabIndex(newIndex)}
             >
               <div className={classes.content}>
-                <EnterAccessKey onSubmit={accessKey => login(accessKey)} />
+                <EnterAccessKey onSubmit={accessKey => console.log(accessKey)} />
               </div>
 
               <div className={classes.content}>
-                <LoginForm onLogin={(username, password) => login(`${username}:${password}`)} />
+                <LoginForm
+                  onLogin={(username, password) => adminLogin({
+                    variables: {
+                      username,
+                      password
+                    }
+                  })}
+                />
               </div>
             </SwipeableViews>
           </Paper>
