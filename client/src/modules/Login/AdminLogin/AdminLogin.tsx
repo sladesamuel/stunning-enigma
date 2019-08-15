@@ -18,7 +18,7 @@ interface AdminLoginProps {
 
 const AdminLogin = ({ onLoginSuccess }: AdminLoginProps) => {
 
-  const [adminLogin, adminLoginResult] = useMutation(
+  const [adminLogin, result] = useMutation(
     ADMIN_LOGIN,
     {
       onCompleted(data) {
@@ -29,14 +29,14 @@ const AdminLogin = ({ onLoginSuccess }: AdminLoginProps) => {
     }
   )
 
-  const adminLoginError =
-    (!!adminLoginResult.error && adminLoginResult.error.message)
-      || (!!adminLoginResult.data && !!adminLoginResult.data.adminLogin && adminLoginResult.data.adminLogin.errorDescription)
+  const loginError =
+    (!!result.error && result.error.message)
+      || (!!result.data && !!result.data.adminLogin && result.data.adminLogin.errorDescription)
 
   return (
     <>
-      {adminLoginResult.loading && <Loading />}
-      {!!adminLoginError && <Error error={adminLoginError} />}
+      {result.loading && <Loading />}
+      {!!loginError && <Error error={loginError} />}
 
       <LoginForm
         onLogin={(username, password) => adminLogin({

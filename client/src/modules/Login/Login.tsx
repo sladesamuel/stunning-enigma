@@ -7,8 +7,9 @@ import {
 } from "@material-ui/core"
 import LockOpenIcon from "@material-ui/icons/LockOpen"
 import VpnKeyIcon from "@material-ui/icons/VpnKey"
-import { EnterAccessKey, PageTitle } from "../../components"
+import { PageTitle } from "../../components"
 import { storeAuthToken } from "../../authentication"
+import { AccessKeyLogin } from "./AccessKeyLogin"
 import { AdminLogin } from "./AdminLogin"
 
 const styles = (theme: Theme) => createStyles({
@@ -62,7 +63,7 @@ const Login = ({ classes }: WithStyles<typeof styles>) => {
             onChangeIndex={newIndex => setTabIndex(newIndex)}
           >
             <div className={classes.content}>
-              <EnterAccessKey onSubmit={accessKey => console.log(accessKey)} />
+              <AccessKeyLogin onLoginSuccess={handleLoginSuccess} />
             </div>
 
             <div className={classes.content}>
