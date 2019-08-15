@@ -2,7 +2,7 @@ import React, { memo } from "react"
 import { useMutation } from "@apollo/react-hooks"
 import gql from "graphql-tag"
 import { Loading, Error } from "../../../components"
-import { LoginForm } from "../../LoginForm"
+import { LoginForm } from "../LoginForm"
 
 const ADMIN_LOGIN = gql`
   mutation adminLogin($username: String!, $password: String!) {

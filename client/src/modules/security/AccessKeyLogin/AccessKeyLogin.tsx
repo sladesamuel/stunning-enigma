@@ -2,7 +2,7 @@ import React, { memo } from "react"
 import { useMutation } from "@apollo/react-hooks"
 import gql from "graphql-tag"
 import { Loading, Error } from "../../../components"
-import { EnterAccessKey } from "../../EnterAccessKey"
+import { EnterAccessKey } from "../EnterAccessKey"
 
 const ACCESS_KEY_LOGIN = gql`
   mutation accessKeyLogin($accessKey: String!) {

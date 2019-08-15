@@ -3,7 +3,7 @@ import gql from "graphql-tag"
 import { useQuery } from "@apollo/react-hooks"
 import { AppContainer } from "../components"
 import { App } from "../App"
-import { Login } from "../modules/Login"
+import { Login } from "../modules/security/Login"
 
 const IS_LOGGED_IN = gql`
   query {

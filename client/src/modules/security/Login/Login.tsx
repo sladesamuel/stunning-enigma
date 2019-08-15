@@ -7,10 +7,10 @@ import {
 } from "@material-ui/core"
 import LockOpenIcon from "@material-ui/icons/LockOpen"
 import VpnKeyIcon from "@material-ui/icons/VpnKey"
-import { PageTitle } from "../../components"
-import { storeAuthToken } from "../../authentication"
-import { AccessKeyLogin } from "./AccessKeyLogin"
-import { AdminLogin } from "./AdminLogin"
+import { PageTitle } from "../../../components"
+import { storeAuthToken } from "../../../authentication"
+import { AccessKeyLogin } from "../AccessKeyLogin"
+import { AdminLogin } from "../AdminLogin"
 
 const styles = (theme: Theme) => createStyles({
   paper: {
