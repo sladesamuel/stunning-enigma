@@ -7,7 +7,7 @@ import {
 } from "@material-ui/core"
 import LockOpenIcon from "@material-ui/icons/LockOpen"
 import VpnKeyIcon from "@material-ui/icons/VpnKey"
-import { EnterAccessKey, LoginForm } from "../../components"
+import { EnterAccessKey, LoginForm, PageTitle } from "../../components"
 
 const styles = (theme: Theme) => createStyles({
   paper: {
@@ -36,6 +36,10 @@ const Login = ({ classes }: WithStyles<typeof styles>) => {
         justify="center"
       >
         <Grid item>
+          <PageTitle>
+            Baby Predictions
+          </PageTitle>
+
           <Paper square className={classes.paper}>
             <Tabs
               value={tabIndex}
