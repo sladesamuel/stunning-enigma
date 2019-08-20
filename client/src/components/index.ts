@@ -1,4 +1,6 @@
 export * from "./AppContainer"
 export * from "./Error"
+export * from "./LinkTab"
 export * from "./Loading"
+export * from "./NavBar"
 export * from "./PageTitle"

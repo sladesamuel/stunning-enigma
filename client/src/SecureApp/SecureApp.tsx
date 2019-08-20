@@ -1,7 +1,6 @@
 import React, { memo } from "react"
 import gql from "graphql-tag"
 import { useQuery } from "@apollo/react-hooks"
-import { AppContainer } from "../components"
 import { App } from "../App"
 import { Login } from "../modules/security/Login"
 
@@ -18,11 +17,7 @@ interface LoginState {
 const SecureApp = () => {
   const { data } = useQuery<LoginState>(IS_LOGGED_IN)
 
-  return (
-    <AppContainer>
-      {(data && data.isLoggedIn) ? <App /> : <Login />}
-    </AppContainer>
-  )
+  return !!data && data.isLoggedIn ? <App /> : <Login />
 }
 
 export default memo(SecureApp)
