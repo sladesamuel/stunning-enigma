@@ -30,7 +30,7 @@
     "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
-    "apollo-server": "^2.7.2",
+    "apollo-server": "^2.14.2",
     "bcrypt": "^3.0.6",
     "graphql": "^14.4.2",
     "jsonwebtoken": "^8.5.1",
